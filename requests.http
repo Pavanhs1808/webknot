@@ -1,0 +1,143 @@
+### Use VS Code REST Client extension to run these
+
+@base = http://127.0.0.1:5000
+@json = Content-Type: application/json
+
+### Health
+GET {{base}}/health
+
+### Create college
+POST {{base}}/colleges
+{{json}}
+
+{
+  "name": "ABC Institute"
+}
+
+### Create students
+POST {{base}}/students
+{{json}}
+
+{
+  "college_id": 1,
+  "name": "Pavan HS",
+  "email": "pavan@example.com"
+}
+
+POST {{base}}/students
+{{json}}
+
+{
+  "college_id": 1,
+  "name": "Riya",
+  "email": "riya@example.com"
+}
+
+### Create events
+POST {{base}}/events
+{{json}}
+
+{
+  "college_id": 1,
+  "name": "Intro to ML",
+  "type": "Workshop",
+  "date": "2025-09-21",
+  "capacity": 100,
+  "venue": "Auditorium",
+  "description": "Basics of ML"
+}
+
+POST {{base}}/events
+{{json}}
+
+{
+  "college_id": 1,
+  "name": "Hackathon 1",
+  "type": "Hackathon",
+  "date": "2025-10-05",
+  "capacity": 200,
+  "venue": "Lab-1",
+  "description": "24h hack"
+}
+
+### Register students
+POST {{base}}/register
+{{json}}
+
+{
+  "student_id": 1,
+  "event_id": 1
+}
+
+POST {{base}}/register
+{{json}}
+
+{
+  "student_id": 2,
+  "event_id": 1
+}
+
+POST {{base}}/register
+{{json}}
+
+{
+  "student_id": 1,
+  "event_id": 2
+}
+
+### Mark attendance
+POST {{base}}/attendance
+{{json}}
+
+{
+  "student_id": 1,
+  "event_id": 1,
+  "present": true
+}
+
+POST {{base}}/attendance
+{{json}}
+
+{
+  "student_id": 2,
+  "event_id": 1,
+  "present": false
+}
+
+POST {{base}}/attendance
+{{json}}
+
+{
+  "student_id": 1,
+  "event_id": 2,
+  "present": true
+}
+
+### Submit feedback
+POST {{base}}/feedback
+{{json}}
+
+{
+  "student_id": 1,
+  "event_id": 1,
+  "rating": 5,
+  "comment": "Great!"
+}
+
+POST {{base}}/feedback
+{{json}}
+
+{
+  "student_id": 2,
+  "event_id": 1,
+  "rating": 3,
+  "comment": "OK"
+}
+
+### Reports
+GET {{base}}/reports/event-popularity
+GET {{base}}/reports/event-popularity?type=Workshop&college_id=1
+GET {{base}}/reports/attendance?event_id=1
+GET {{base}}/reports/feedback?event_id=1
+GET {{base}}/reports/student-participation?student_id=1
+GET {{base}}/reports/top-students?college_id=1&limit=3

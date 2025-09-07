@@ -1,0 +1,54 @@
+PRAGMA foreign_keys = ON;
+
+CREATE TABLE IF NOT EXISTS colleges (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS students (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  college_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  FOREIGN KEY (college_id) REFERENCES colleges(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  college_id INTEGER NOT NULL,
+  name TEXT NOT NULL,
+  type TEXT CHECK (type IN ('Workshop','Hackathon','Seminar','Fest','TechTalk')),
+  date TEXT NOT NULL, -- ISO string YYYY-MM-DD
+  capacity INTEGER,
+  venue TEXT,
+  description TEXT,
+  status TEXT DEFAULT 'Active' CHECK (status IN ('Active','Cancelled')),
+  FOREIGN KEY (college_id) REFERENCES colleges(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS registrations (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  student_id INTEGER NOT NULL,
+  event_id INTEGER NOT NULL,
+  ts DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(student_id, event_id),
+  FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+  FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS attendance (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  registration_id INTEGER NOT NULL UNIQUE,
+  present INTEGER NOT NULL CHECK (present IN (0,1)),
+  ts DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (registration_id) REFERENCES registrations(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS feedback (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  registration_id INTEGER NOT NULL UNIQUE,
+  rating INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+  comment TEXT,
+  ts DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (registration_id) REFERENCES registrations(id) ON DELETE CASCADE
+);

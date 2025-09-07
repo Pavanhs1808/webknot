@@ -1,0 +1,220 @@
+{
+  "info": {
+    "name": "Campus Event API (Fresh Run)",
+    "_postman_id": "abcd1234-5678-efgh-ijkl-9876543210ab",
+    "description": "Fresh collection for Campus Event Management Assignment (clean IDs)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:5000/health"
+      }
+    },
+    {
+      "name": "Create College",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Tech University\"\n}"
+        },
+        "url": "http://127.0.0.1:5000/colleges"
+      }
+    },
+    {
+      "name": "Create Student 1",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"college_id\": 1,\n  \"name\": \"Pavan HS\",\n  \"email\": \"pavan1@example.com\"\n}"
+        },
+        "url": "http://127.0.0.1:5000/students"
+      }
+    },
+    {
+      "name": "Create Student 2",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"college_id\": 1,\n  \"name\": \"Riya\",\n  \"email\": \"riya1@example.com\"\n}"
+        },
+        "url": "http://127.0.0.1:5000/students"
+      }
+    },
+    {
+      "name": "Create Event 1",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"college_id\": 1,\n  \"name\": \"Intro to ML\",\n  \"type\": \"Workshop\",\n  \"date\": \"2025-09-21\",\n  \"capacity\": 100,\n  \"venue\": \"Auditorium\",\n  \"description\": \"Basics of ML\"\n}"
+        },
+        "url": "http://127.0.0.1:5000/events"
+      }
+    },
+    {
+      "name": "Create Event 2",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"college_id\": 1,\n  \"name\": \"Hackathon 1\",\n  \"type\": \"Hackathon\",\n  \"date\": \"2025-10-05\",\n  \"capacity\": 200,\n  \"venue\": \"Lab-1\",\n  \"description\": \"24h hack\"\n}"
+        },
+        "url": "http://127.0.0.1:5000/events"
+      }
+    },
+    {
+      "name": "Register Student 1 to Event 1",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"student_id\": 1,\n  \"event_id\": 1\n}"
+        },
+        "url": "http://127.0.0.1:5000/register"
+      }
+    },
+    {
+      "name": "Register Student 2 to Event 1",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"student_id\": 2,\n  \"event_id\": 1\n}"
+        },
+        "url": "http://127.0.0.1:5000/register"
+      }
+    },
+    {
+      "name": "Register Student 1 to Event 2",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"student_id\": 1,\n  \"event_id\": 2\n}"
+        },
+        "url": "http://127.0.0.1:5000/register"
+      }
+    },
+    {
+      "name": "Mark Attendance (Student 1, Event 1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"student_id\": 1,\n  \"event_id\": 1,\n  \"present\": true\n}"
+        },
+        "url": "http://127.0.0.1:5000/attendance"
+      }
+    },
+    {
+      "name": "Mark Attendance (Student 2, Event 1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"student_id\": 2,\n  \"event_id\": 1,\n  \"present\": false\n}"
+        },
+        "url": "http://127.0.0.1:5000/attendance"
+      }
+    },
+    {
+      "name": "Submit Feedback (Student 1, Event 1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"student_id\": 1,\n  \"event_id\": 1,\n  \"rating\": 5,\n  \"comment\": \"Great event!\"\n}"
+        },
+        "url": "http://127.0.0.1:5000/feedback"
+      }
+    },
+    {
+      "name": "Submit Feedback (Student 2, Event 1)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"student_id\": 2,\n  \"event_id\": 1,\n  \"rating\": 3,\n  \"comment\": \"OK\"\n}"
+        },
+        "url": "http://127.0.0.1:5000/feedback"
+      }
+    },
+    {
+      "name": "Report: Event Popularity",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:5000/reports/event-popularity"
+      }
+    },
+    {
+      "name": "Report: Attendance for Event 1",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:5000/reports/attendance?event_id=1"
+      }
+    },
+    {
+      "name": "Report: Feedback for Event 1",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:5000/reports/feedback?event_id=1"
+      }
+    },
+    {
+      "name": "Report: Student Participation",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:5000/reports/student-participation?student_id=1"
+      }
+    },
+    {
+      "name": "Report: Top 3 Students",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:5000/reports/top-students?college_id=1&limit=3"
+      }
+    }
+  ]
+}
